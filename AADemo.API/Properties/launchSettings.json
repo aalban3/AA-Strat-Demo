@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:37767",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "Dev - Alan Demo": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:8080",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATA_SOURCE_URL": "https://raw.githubusercontent.com/StrategicFS/Recruitment/master/creditData.json"
+      },
+      "dotnetRunMessages": true
+    }
+  }
+}
