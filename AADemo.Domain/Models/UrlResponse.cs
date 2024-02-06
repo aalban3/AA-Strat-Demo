@@ -2,5 +2,5 @@
 
 public class UrlResponse
 {
-    public IList<CreditData> CreditReports { get; } = new List<CreditData>();
+    public IList<CreditData> CreditReports { get; set; } = new List<CreditData>();
 }

@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using AADemo.Domain.Entities;
 using AADemo.Domain.Models;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,10 @@ public class CreditDataService: ICreditDataService
         try
         {
             var client = _httpClientFactory.CreateClient();
+
+            var res = await client.GetStringAsync(_dataUrl);
+            var mappedRes = JsonSerializer.Deserialize<UrlResponse>(res);
+
             UrlResponse? data = client.GetFromJsonAsync<UrlResponse>(_dataUrl).Result;
 
             return (CreditData?) data?.CreditReports.Where(d => d.ApplicationId == applicationId && d.Source == source && d.Bureau == bureau);
