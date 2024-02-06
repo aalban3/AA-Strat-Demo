@@ -24,12 +24,15 @@ public class CreditDataService: ICreditDataService
         {
             var client = _httpClientFactory.CreateClient();
 
-            var res = await client.GetStringAsync(_dataUrl);
-            var mappedRes = JsonSerializer.Deserialize<UrlResponse>(res);
+            var response = await client.GetFromJsonAsync<UrlResponse>(_dataUrl);
+            var data = response?.CreditReports.AsEnumerable();
 
-            UrlResponse? data = client.GetFromJsonAsync<UrlResponse>(_dataUrl).Result;
+            var creditReport = data?.First(d =>
+            d.ApplicationId == applicationId &&
+            d.Source == source &&
+            d.Bureau == bureau);
 
-            return (CreditData?) data?.CreditReports.Where(d => d.ApplicationId == applicationId && d.Source == source && d.Bureau == bureau);
+            return creditReport;
         }
         catch(Exception ex)
         {
