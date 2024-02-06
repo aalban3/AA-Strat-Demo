@@ -15,6 +15,7 @@ public static class ServiceInitializer
     private static void RegisterDemoServices(IServiceCollection services)
     {
         services.AddScoped<ICreditDataService, CreditDataService>();
+        services.AddScoped<IDebtDataService, DebtDataService>();
     }
 }
 

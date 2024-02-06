@@ -47,9 +47,12 @@ public class CreditDataService: ICreditDataService
         try
         {
             var client = _httpClientFactory.CreateClient();
-            var data = await client.GetFromJsonAsync<UrlResponse>(_dataUrl);
+            var response = await client.GetFromJsonAsync<UrlResponse>(_dataUrl);
+            var data = response?.CreditReports.AsEnumerable();
 
-            return (CreditData?)data?.CreditReports.Where(d => d.ApplicationId == applicationId);
+            var creditReport = data?.First(d => d.ApplicationId == applicationId);
+
+            return creditReport;
         }
         catch (Exception ex)
         {
