@@ -18,7 +18,7 @@ public class DebtDataController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] int applicationId, [FromQuery] decimal annualIncome)
+    public async Task<IActionResult> Get([FromQuery] long? applicationId, [FromQuery] decimal? annualIncome)
     {
         try
         {

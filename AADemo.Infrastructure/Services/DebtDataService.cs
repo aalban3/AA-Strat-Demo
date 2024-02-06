@@ -15,7 +15,7 @@ public class DebtDataService: IDebtDataService
 		_logger = logger;
     }
 
-	public async Task<DebtData?> GetAsync(int applicationId, decimal annualIncome)
+	public async Task<DebtData?> GetAsync(long? applicationId, decimal? annualIncome)
 	{
 		try
 		{
@@ -25,7 +25,7 @@ public class DebtDataService: IDebtDataService
 
             var debts = data.Tradelines.Where(t => t.Type == "UNSECURED");
             var debtBalance = debts.Aggregate(0m, (total, val) => total += val.Balance);
-            var dti = debtBalance / annualIncome;
+            var dti = debtBalance / (annualIncome ?? 1m);
 
             var result = new DebtData
             {

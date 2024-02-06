@@ -6,5 +6,3 @@ public class DebtData
     public decimal UnsecuredDebtBalance { get; set; }
     public decimal DTI { get; set; }
 }
-
-

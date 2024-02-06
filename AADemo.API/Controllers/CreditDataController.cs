@@ -18,14 +18,14 @@ public class CreditDataController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] int? applicationId, [FromQuery] string? source, [FromQuery] string? bureau)
+    public async Task<IActionResult> Get([FromQuery] long? applicationId, [FromQuery] string? source, [FromQuery] string? bureau)
     {
         try
         {
             if (
-            applicationId == null ||
-            source == null ||
-            bureau == null )
+                applicationId == null ||
+                source == null ||
+                bureau == null )
             {
                 return BadRequest("Missing required fields");
             }

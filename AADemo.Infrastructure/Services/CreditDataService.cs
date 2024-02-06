@@ -17,16 +17,14 @@ public class CreditDataService: ICreditDataService
         _httpClientFactory = clientFactory;
     }
 
-    public async Task<CreditData?> GetAsync(int? applicationId, string? source, string? bureau)
+    public async Task<CreditData?> GetAsync(long? applicationId, string? source, string? bureau)
     {
         try
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_dataUrl);
+            UrlResponse? data = client.GetFromJsonAsync<UrlResponse>(_dataUrl).Result;
 
-            var data = await response.Content.ReadFromJsonAsync<List<CreditData>>();
-
-            return (CreditData?) data?.Where(d => d.ApplicationId == applicationId && d.Source == source && d.Bureau == bureau);
+            return (CreditData?) data?.CreditReports.Where(d => d.ApplicationId == applicationId && d.Source == source && d.Bureau == bureau);
         }
         catch(Exception ex)
         {
@@ -36,16 +34,14 @@ public class CreditDataService: ICreditDataService
 
     }
 
-    public async Task<CreditData?> GetAsync(int? applicationId)
+    public async Task<CreditData?> GetAsync(long? applicationId)
     {
         try
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_dataUrl);
+            var data = await client.GetFromJsonAsync<UrlResponse>(_dataUrl);
 
-            var data = await response.Content.ReadFromJsonAsync<List<CreditData>>();
-
-            return (CreditData?)data?.Where(d => d.ApplicationId == applicationId);
+            return (CreditData?)data?.CreditReports.Where(d => d.ApplicationId == applicationId);
         }
         catch (Exception ex)
         {

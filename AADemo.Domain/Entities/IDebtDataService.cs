@@ -4,7 +4,5 @@ namespace AADemo.Domain.Entities;
 
 public interface IDebtDataService
 {
-    Task<DebtData?> GetAsync(int applicationId, decimal annualIncome);
+    Task<DebtData?> GetAsync(long? applicationId, decimal? annualIncome);
 }
-
-

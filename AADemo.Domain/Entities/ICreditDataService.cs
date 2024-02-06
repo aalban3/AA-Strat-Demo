@@ -4,6 +4,6 @@ namespace AADemo.Domain.Entities;
 
 public interface ICreditDataService
 {
-    Task<CreditData?> GetAsync(int? applicationId, string? source, string? bureau);
-    Task<CreditData?> GetAsync(int? applicationId);
+    Task<CreditData?> GetAsync(long? applicationId, string? source, string? bureau);
+    Task<CreditData?> GetAsync(long? applicationId);
 }
